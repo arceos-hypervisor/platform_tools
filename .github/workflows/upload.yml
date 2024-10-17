@@ -1,0 +1,21 @@
+name: Package and Release
+
+on: [push, pull_request]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Zip folder
+        run: rm *.zip && ls | grep -v '*.zip'|awk '{print "zip -r -4 "$0".zip "$0}' | bash
+
+      - name: Upload Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: latest
+          files: "*.zip"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
