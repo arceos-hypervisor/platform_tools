@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Zip folder
-        run: rm *.zip && ls | grep -v '*.zip'|awk '{print "zip -r -4 "$0".zip "$0}' | bash
+        run: ls | grep -v '*.zip'|awk '{print "zip -r -4 "$0".zip "$0}' | bash
 
       - name: Upload Release
         uses: softprops/action-gh-release@v1
